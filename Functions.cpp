@@ -40,12 +40,17 @@ string** scoring(string* str, int Num) {
 
 	for (int p = 0; p < Num; p++) {
 		ifstream iFile(str[p]);
-
+		if (!iFile.is_open()) {
+			cout << "File open error!" << endl;
+			return 0;
+		}
 		int N = 0;
 		iFile >> N;
+		iFile.close();
+
 		string** countries = create_matrix(N, 22);
 
-
+		files_reading(countries, str[p]);
 
 
 
@@ -53,7 +58,7 @@ string** scoring(string* str, int Num) {
 		
 		delete_matrix(countries, N, 22);
 
-		iFile.close();
+
 	}
 
 	return top_ten;
@@ -74,4 +79,40 @@ void delete_matrix(string** matrix, int row, int col) {
 		delete[] matrix[i];
 	}
 	delete[]  matrix;
+}
+
+/*==== File read function ====*/
+void files_reading(string** matr, string name) {
+	ifstream iFile(name);
+	if (!iFile.is_open()) {
+		cout << "File open error!" << endl;
+		return;
+	}
+
+	int N = 0;
+	iFile >> N;
+
+	string str;
+	getline(iFile, str);
+	for (int i = 0; i < N; i++) {
+		for (int j = 0; j < 20; j++) {
+			getline(iFile, str, ',');
+			matr[i][j] = str;
+		}
+		/*int X;
+		iFile >> X;
+		matr[i][20] = X;
+		getline(iFile, str);*/
+		getline(iFile, str);
+		matr[i][20] = str;
+	}
+
+	for (int i = 0; i < N; i++) {
+		for (int j = 0; j < 22; j++) {
+			cout << j+1 << "-->("<< matr[i][j]<< ")  " ;
+		}
+		cout << endl;
+	}
+
+	iFile.close();
 }
