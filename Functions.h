@@ -10,3 +10,4 @@ using namespace std;
 
 string* file_search(int*);
 void delete_mass(string*);
+string** scoring(string*, int);
