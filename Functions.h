@@ -7,3 +7,6 @@
 #include <io.h>
 
 using namespace std;
+
+string* file_search(int*);
+void delete_mass(string*);
