@@ -9,5 +9,7 @@
 using namespace std;
 
 string* file_search(int*);
-void delete_mass(string*);
+void delete_mass(string*, string**);
 string** scoring(string*, int);
+string** create_matrix(int, int);
+void delete_matrix(string**, int, int);

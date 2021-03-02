@@ -25,8 +25,9 @@ string* file_search(int* Num) {
 }
 
 /*==== Dynamic array delete function ====*/
-void delete_mass(string* str) {
+void delete_mass(string* str, string** str2) {
 	delete[] str;
+	delete_matrix(str2, 10, 2);
 }
 
 /*==== Scoring function ====*/
@@ -42,23 +43,35 @@ string** scoring(string* str, int Num) {
 
 		int N = 0;
 		iFile >> N;
-		string** countries = new string * [N];
-		for (int i = 0; i < N; i++) {
-			countries[i] = new string[22];
-		}
+		string** countries = create_matrix(N, 22);
+
 
 
 
 
 
 		
-		for (int i = 0; i < N; i++) {
-			delete [] countries[i];
-		}
-		delete []  countries;
+		delete_matrix(countries, N, 22);
 
 		iFile.close();
 	}
 
 	return top_ten;
+}
+
+/*==== Dynamic matrix create function ====*/
+string** create_matrix(int row, int col) {
+	string** matrix = new string * [row];
+	for (int i = 0; i < row; i++) {
+		matrix[i] = new string[col];
+	}
+	return matrix;
+}
+
+/*==== Dynamic matrix delete function ====*/
+void delete_matrix(string** matrix, int row, int col) {
+	for (int i = 0; i < row; i++) {
+		delete[] matrix[i];
+	}
+	delete[]  matrix;
 }
