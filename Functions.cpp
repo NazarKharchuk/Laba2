@@ -207,3 +207,13 @@ int search_min_element(string** arr) {
 	}
 	return min;
 }
+
+/*==== Function, which creates a final file ====*/
+void file_creation(string** arr) {
+	ofstream oFile("results.csv");
+	for (int i = 0; i < 9; i++) {
+		oFile << arr[i][0] << ",";
+	}
+	oFile << arr[9][0];
+	oFile.close();
+}

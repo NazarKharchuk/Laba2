@@ -17,3 +17,4 @@ void files_reading(string**, string);
 void sort(string**, int, int, int);
 void give_score(string**, int);
 int search_min_element(string**);
+void file_creation(string**);
