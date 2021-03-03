@@ -38,6 +38,10 @@ string** scoring(string* str, int Num) {
 		top_ten[i] = new string[2];
 	}
 
+	for (int i = 0; i < 10; i++) {
+		top_ten[i][1] = "0";
+	}
+
 	for (int p = 0; p < Num; p++) {
 		ifstream iFile(str[p]);
 		if (!iFile.is_open()) {
@@ -52,7 +56,27 @@ string** scoring(string* str, int Num) {
 
 		files_reading(countries, str[p]);
 
+		for (int c = 1; c < 21; c++) {
+			sort(countries, N, 22, c);
+			give_score(countries, N);
+		}
 
+
+		for (int m = 0; m < N; m++) {
+			int min = search_min_element(top_ten);
+			if (stoi(countries[m][21]) > stoi(top_ten[min][1])) {
+				top_ten[min][1] = countries[m][21];
+				top_ten[min][0] = countries[m][0];
+			}
+		}
+
+
+		for (int i = 0; i < N; i++) {
+			for (int j = 0; j < 22; j++) {
+				cout << j + 1 << "-->(" << countries[i][j] << ")  ";
+			}
+			cout << endl;
+		}
 
 
 		
@@ -60,6 +84,8 @@ string** scoring(string* str, int Num) {
 
 
 	}
+
+	sort(top_ten, 10, 2, 1);
 
 	return top_ten;
 }
@@ -105,14 +131,15 @@ void files_reading(string** matr, string name) {
 		getline(iFile, str);*/
 		getline(iFile, str);
 		matr[i][20] = str;
+		matr[i][21] = "0";
 	}
 
-	for (int i = 0; i < N; i++) {
+	/*for (int i = 0; i < N; i++) {
 		for (int j = 0; j < 22; j++) {
 			cout << j+1 << "-->("<< matr[i][j]<< ")  " ;
 		}
 		cout << endl;
-	}
+	}*/
 
 	iFile.close();
 }

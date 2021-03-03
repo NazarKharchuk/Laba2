@@ -11,8 +11,10 @@ int main() {
 
 	string** top_ten = scoring(name_of_files, number_of_files);		//Scoring function
 
-	/*for (int i = 0; i <10; i++)
-	cout << top_ten[i][0] << "\t" << top_ten[i][1] << endl;*/
+	for (int i = 0; i <10; i++)
+	cout << top_ten[i][0] << "\t" << top_ten[i][1] << endl;
+
+	file_creation(top_ten);
 
 	delete_mass(name_of_files, top_ten);		//Dynamic array delete function
 }
