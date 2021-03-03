@@ -116,3 +116,24 @@ void files_reading(string** matr, string name) {
 
 	iFile.close();
 }
+
+
+/*==== Sorting function ====*/
+void sort(string** arr, int row, int col, int X) {
+	string delta;
+	for (int i = 0; i < row - 1; i++) 
+	{
+		for (int j = 0; j < row - i - 1; j++) 
+		{
+			if (stoul(arr[j][X]) < stoul(arr[j + 1][X])) 
+			{
+				for (int n = 0; n < col; n++) 
+				{
+					delta = arr[j][n];
+					arr[j][n] = arr[j + 1][n];
+					arr[j + 1][n] = delta;
+				}
+			}
+		}
+	}
+}
