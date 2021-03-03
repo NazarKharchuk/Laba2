@@ -85,7 +85,7 @@ string** scoring(string* str, int Num) {
 
 	}
 
-	sort(top_ten, 10, 2, 1);
+	sort(top_ten, 10, 2, 1);				//Sorting the top countries
 
 	return top_ten;
 }
