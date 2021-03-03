@@ -15,3 +15,4 @@ string** create_matrix(int, int);
 void delete_matrix(string**, int, int);
 void files_reading(string**, string);
 void sort(string**, int, int, int);
+void give_score(string**, int);

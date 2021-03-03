@@ -137,3 +137,60 @@ void sort(string** arr, int row, int col, int X) {
 		}
 	}
 }
+
+
+/*==== Function, which hands out the points ====*/
+void give_score(string** arr, int number) 
+{
+	int score;
+	if (number > 0) 
+	{
+		score = stoul(arr[0][21]) + 12;
+		arr[0][21] = to_string(score);
+	}
+	if (number > 1) 
+	{
+		score = stoul(arr[1][21]) + 10;
+		arr[1][21] = to_string(score);
+	}
+	if (number > 2) 
+	{
+		score = stoul(arr[2][21]) + 8;
+		arr[2][21] = to_string(score);
+	}
+	if (number > 3) 
+	{
+		score = stoul(arr[3][21]) + 7;
+		arr[3][21] = to_string(score);
+	}
+	if (number > 4) 
+	{
+		score = stoul(arr[4][21]) + 6;
+		arr[4][21] = to_string(score);
+	}
+	if (number > 5) 
+	{
+		score = stoul(arr[5][21]) + 5;
+		arr[5][21] = to_string(score);
+	}
+	if (number > 6) 
+	{
+		score = stoul(arr[6][21]) + 4;
+		arr[6][21] = to_string(score);
+	}
+	if (number > 7) 
+	{
+		score = stoul(arr[7][21]) + 3;
+		arr[7][21] = to_string(score);
+	}
+	if (number > 8)
+	{
+		score = stoul(arr[8][21]) + 2;
+		arr[8][21] = to_string(score);
+	}
+	if (number > 9) 
+	{
+		score = stoul(arr[9][21]) + 1;
+		arr[9][21] = to_string(score);
+	}
+}
