@@ -194,3 +194,16 @@ void give_score(string** arr, int number)
 		arr[9][21] = to_string(score);
 	}
 }
+
+/*==== Function, which returns a min.element ====*/
+int search_min_element(string** arr) {
+	int min = 0;
+	for (int i = 1; i < 10; i++) 
+	{
+		if (stoi(arr[i][1]) < stoi(arr[min][1])) 
+		{
+			min = i;
+		}
+	}
+	return min;
+}
