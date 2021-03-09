@@ -42,6 +42,9 @@ string** scoring(string* str, int Num) {
 		top_ten[i][1] = "0";
 	}
 
+	int num_countries = 0;				//Number of all countries
+
+
 	for (int p = 0; p < Num; p++) {
 		ifstream iFile(str[p]);
 		if (!iFile.is_open()) {
@@ -51,39 +54,56 @@ string** scoring(string* str, int Num) {
 		int N = 0;
 		iFile >> N;
 		iFile.close();
+		num_countries += N;
+	}
 
-		string** countries = create_matrix(N, 22);
+	string** countries = create_matrix(num_countries, 22);
 
-		files_reading(countries, str[p]);
-
-		for (int c = 1; c < 21; c++) {
-			sort(countries, N, 22, c);
-			give_score(countries, N);
+	int place = 0;
+	for (int q = 0; q < Num; q++) {
+		ifstream iFile(str[q]);
+		if (!iFile.is_open()) {
+			cout << "File open error!" << endl;
+			return 0;
 		}
+		int N = 0;
+		iFile >> N;
+
+		files_reading(countries, str[q], place);
+
+		place += N;
+		iFile.close();
+	}
+
+		
+
+	for (int c = 1; c < 21; c++) {
+		sort(countries, num_countries, 22, c);
+		give_score(countries, num_countries);
+	}
 
 
-		for (int m = 0; m < N; m++) {
-			int min = search_min_element(top_ten);
-			if (stoi(countries[m][21]) > stoi(top_ten[min][1])) {
-				top_ten[min][1] = countries[m][21];
-				top_ten[min][0] = countries[m][0];
-			}
+	for (int m = 0; m < num_countries; m++) {
+		int min = search_min_element(top_ten);
+		if (stoi(countries[m][21]) > stoi(top_ten[min][1])) {
+			top_ten[min][1] = countries[m][21];
+			top_ten[min][0] = countries[m][0];
 		}
+	}
 
 
-		for (int i = 0; i < N; i++) {
-			for (int j = 0; j < 22; j++) {
-				cout << j + 1 << "-->(" << countries[i][j] << ")  ";
-			}
-			cout << endl;
+	/*for (int i = 0; i < num_countries; i++) {
+		for (int j = 0; j < 22; j++) {
+			cout << j + 1 << "-->(" << countries[i][j] << ")  ";
 		}
+		cout << endl;
+	}*/
 
 
 		
-		delete_matrix(countries, N, 22);
+	delete_matrix(countries, num_countries, 22);
 
 
-	}
 
 	sort(top_ten, 10, 2, 1);				//Sorting the top countries
 
@@ -108,7 +128,7 @@ void delete_matrix(string** matrix, int row, int col) {
 }
 
 /*==== File read function ====*/
-void files_reading(string** matr, string name) {
+void files_reading(string** matr, string name, int place) {
 	ifstream iFile(name);
 	if (!iFile.is_open()) {
 		cout << "File open error!" << endl;
@@ -120,7 +140,7 @@ void files_reading(string** matr, string name) {
 
 	string str;
 	getline(iFile, str);
-	for (int i = 0; i < N; i++) {
+	for (int i = place; i < N + place; i++) {
 		for (int j = 0; j < 20; j++) {
 			getline(iFile, str, ',');
 			matr[i][j] = str;
