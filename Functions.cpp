@@ -75,13 +75,14 @@ string** scoring(string* str, int Num) {
 		iFile.close();
 	}
 
-		
+	int* arr1 = points();
 
 	for (int c = 1; c < 21; c++) {
 		sort(countries, num_countries, 22, c);
-		give_score(countries, num_countries);
+		give_score(countries, num_countries, arr1);
 	}
 
+	delete_mass(arr1);
 
 	for (int m = 0; m < num_countries; m++) {
 		int min = search_min_element(top_ten);
@@ -125,6 +126,7 @@ void delete_matrix(string** matrix, int row, int col) {
 		delete[] matrix[i];
 	}
 	delete[]  matrix;
+	
 }
 
 /*==== File read function ====*/
@@ -187,59 +189,19 @@ void sort(string** arr, int row, int col, int X) {
 
 
 /*==== Function, which hands out the points ====*/
-void give_score(string** arr, int number) 
+void give_score(string** arr, int number, int* arr1) 
 {
 	int score;
-	if (number > 0) 
+
+	for (int j = 0; j < 10; j++)
 	{
-		score = stoul(arr[0][21]) + 12;
-		arr[0][21] = to_string(score);
+		if (number > j)
+		{
+			score = stoul(arr[j][21]) + arr1[j];
+			arr[j][21] = to_string(score);
+		}
 	}
-	if (number > 1) 
-	{
-		score = stoul(arr[1][21]) + 10;
-		arr[1][21] = to_string(score);
-	}
-	if (number > 2) 
-	{
-		score = stoul(arr[2][21]) + 8;
-		arr[2][21] = to_string(score);
-	}
-	if (number > 3) 
-	{
-		score = stoul(arr[3][21]) + 7;
-		arr[3][21] = to_string(score);
-	}
-	if (number > 4) 
-	{
-		score = stoul(arr[4][21]) + 6;
-		arr[4][21] = to_string(score);
-	}
-	if (number > 5) 
-	{
-		score = stoul(arr[5][21]) + 5;
-		arr[5][21] = to_string(score);
-	}
-	if (number > 6) 
-	{
-		score = stoul(arr[6][21]) + 4;
-		arr[6][21] = to_string(score);
-	}
-	if (number > 7) 
-	{
-		score = stoul(arr[7][21]) + 3;
-		arr[7][21] = to_string(score);
-	}
-	if (number > 8)
-	{
-		score = stoul(arr[8][21]) + 2;
-		arr[8][21] = to_string(score);
-	}
-	if (number > 9) 
-	{
-		score = stoul(arr[9][21]) + 1;
-		arr[9][21] = to_string(score);
-	}
+
 }
 
 /*==== Function, which returns a min.element ====*/
@@ -263,4 +225,29 @@ void file_creation(string** arr) {
 	}
 	oFile << arr[9][0];
 	oFile.close();
+}
+
+int* points() {
+	int  num_prizes;
+	cout << "Enter number of prizes:";
+	cin >> num_prizes;
+	int points;
+	int* arr1 = new int[10];
+
+	for (int i = 0; i < 10; i++)
+	{
+		arr1[i] = 0;
+	}
+
+	for (int i = 0; i < num_prizes; i++)
+	{
+		cout << "Enter " << i + 1 << " point : ";
+		cin >> points;
+		arr1[i] = points;
+	}
+	return arr1;
+}
+
+void delete_mass(int* arr) {
+	delete[] arr;
 }
